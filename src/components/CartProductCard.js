@@ -6,12 +6,7 @@ function CartProductCard({ item, onRemoveFromCart }) {
     <div className="flex items-center justify-between space-x-4 p-2 border-b transition duration-500 ease-in-out hover:bg-neutral-300 dark:bg-gray-800 dark:hover:bg-gray-900 hover:bg-black">
       <div className="flex items-center space-x-4">
         <div className="w-16 h-10 relative">
-          <Image
-            src={item.image}
-            alt={item.name}
-            layout="fill"
-            objectFit="cover"
-          />
+          <Image src={item.image} alt={item.name} fill object-fit="cover" />
         </div>
         <div>
           <h5 className="font-bold">{item.name}</h5>

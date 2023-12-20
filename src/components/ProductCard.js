@@ -9,7 +9,7 @@ function ProductCard({ product, onAddToCart }) {
           alt={product.name}
           width={200}
           height={200}
-          objectFit="cover"
+          object-fit="cover"
           className="rounded-lg w-64 h-44"
         />
       </div>

@@ -57,18 +57,10 @@ describe("calculateTotalPrice", () => {
     expect(total).toBe(expectedTotal);
   });
 
-  it("calculates the total price correctly - ipd bulk discount for 3 ipds", () => {
-    const items = [{ SKU: "ipd", quantity: 3 }];
-
-    const expectedTotal = 1649.97;
-    const total = calculateTotalPrice(items);
-    expect(total).toBe(expectedTotal);
-  });
-
   it("calculates the total price correctly - ipd bulk discount for 4 ipds", () => {
     const items = [{ SKU: "ipd", quantity: 4 }];
 
-    const expectedTotal = 1999.96;
+    const expectedTotal = 2199.96;
     const total = calculateTotalPrice(items);
     expect(total).toBe(expectedTotal);
   });
@@ -77,6 +69,14 @@ describe("calculateTotalPrice", () => {
     const items = [{ SKU: "ipd", quantity: 5 }];
 
     const expectedTotal = 2499.95;
+    const total = calculateTotalPrice(items);
+    expect(total).toBe(expectedTotal);
+  });
+
+  it("calculates the total price correctly - ipd bulk discount for 6 ipds", () => {
+    const items = [{ SKU: "ipd", quantity: 6 }];
+
+    const expectedTotal = 2999.94;
     const total = calculateTotalPrice(items);
     expect(total).toBe(expectedTotal);
   });

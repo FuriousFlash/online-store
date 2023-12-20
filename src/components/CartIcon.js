@@ -3,7 +3,7 @@ import { HiOutlineShoppingCart, HiShoppingCart } from "react-icons/hi";
 function CartIcon({ itemCount, onClick }) {
   return (
     <div className="relative cursor-pointer" onClick={onClick}>
-      <div className="relative flex flex-row justify-center items-center w-12 h-12 p-2 border border-black dark:border-white rounded-full">
+      <div className="relative flex flex-row justify-center items-center w-12 h-12 p-2 border border-black dark:border-white hover:border-transparent dark:hover:border-gray-900 hover:scale-110 transition duration-500 ease-in-out rounded-full">
         {itemCount > 0 ? (
           <HiShoppingCart className="w-full h-full" />
         ) : (

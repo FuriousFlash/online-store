@@ -17,7 +17,7 @@ function ProductCard({ product, onAddToCart }) {
         <h3 className="text-lg font-bold">{product.name}</h3>
         <p className="text-gray-700 dark:text-gray-300">${product.price}</p>
         <button
-          className="mt-4 bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded-lg transition ease-in-out duration-500"
+          className="mt-4 transition duration-500 ease-in-out bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded-lg transition ease-in-out duration-500"
           onClick={() => onAddToCart(product)}
         >
           Add to Cart

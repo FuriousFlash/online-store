@@ -10,7 +10,7 @@ function CartSidebar({ cart, onRemoveFromCart, onClose }) {
         </div>
         <button
           onClick={onClose}
-          className="border rounded-full p-2 hover:bg-neutral-300 dark:bg-gray-800 dark:hover:bg-gray-900 dark:hover:border-neutral-400"
+          className="border rounded-full p-2 transition duration-500 ease-in-out hover:bg-neutral-300 dark:bg-gray-800 dark:hover:bg-gray-900 dark:hover:border-neutral-400"
         >
           <AiOutlineClose size={20} />
         </button>
@@ -32,7 +32,7 @@ function CartSidebar({ cart, onRemoveFromCart, onClose }) {
           className={`${
             cart.length === 0
               ? "bg-gray-600 dark:text-black text-white cursor-not-allowed"
-              : "bg-green-500 hover:bg-green-600 text-black"
+              : "bg-green-500 hover:bg-green-600 text-black transition duration-500 ease-in-out"
           } font-bold py-2 px-4 rounded-lg`}
           disabled={cart.length === 0}
         >

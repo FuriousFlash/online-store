@@ -31,8 +31,7 @@ function HomePage() {
     setCart((prevCart) => {
       return prevCart.reduce((acc, product) => {
         if (product.SKU === productToRemove.SKU) {
-          if (product.quantity === 1) return acc;
-          return [...acc, { ...product, quantity: product.quantity - 1 }];
+          return acc;
         }
         return [...acc, product];
       }, []);

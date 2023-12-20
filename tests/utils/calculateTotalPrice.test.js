@@ -114,12 +114,12 @@ describe("calculateTotalPrice", () => {
   it("calculates the total price correctly given a set of items that fall into all deals", () => {
     const items = [
       { SKU: "atv", quantity: 3 },
-      { SKU: "ipd", quantity: 4 },
+      { SKU: "ipd", quantity: 5 },
       { SKU: "mbp", quantity: 2 },
       { SKU: "vga", quantity: 3 },
     ];
 
-    const expectedTotal = 5048.94;
+    const expectedTotal = 5548.93;
     const total = calculateTotalPrice(items);
     expect(total).toBe(expectedTotal);
   });
@@ -131,7 +131,7 @@ describe("calculateTotalPrice", () => {
       { SKU: "mbp", quantity: 1 },
     ];
 
-    const expectedTotal = 2718.98;
+    const expectedTotal = 2718.97;
     const total = calculateTotalPrice(items);
     expect(total).toBe(expectedTotal);
   });

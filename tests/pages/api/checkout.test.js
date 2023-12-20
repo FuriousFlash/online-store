@@ -2,7 +2,7 @@ import { createMocks } from "node-mocks-http";
 import checkoutHandler from "@pages/api/checkout";
 import calculateTotalPrice from "@utils/calculateTotalPrice";
 
-jest.mock("@services/calculateTotalPrice", () => ({
+jest.mock("@utils/calculateTotalPrice", () => ({
   __esModule: true,
   default: jest.fn(),
 }));

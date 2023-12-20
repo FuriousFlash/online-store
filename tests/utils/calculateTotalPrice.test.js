@@ -1,4 +1,4 @@
-import calculateTotalPrice from "@services/calculateTotalPrice";
+import calculateTotalPrice from "@utils/calculateTotalPrice";
 
 describe("calculateTotalPrice", () => {
   it("calculates the total price correctly for 1 ipd", () => {

@@ -5,9 +5,15 @@ function CartIcon({ itemCount, onClick }) {
     <div className="relative cursor-pointer" onClick={onClick}>
       <div className="relative flex flex-row justify-center items-center w-12 h-12 p-2 border border-black dark:border-white hover:border-transparent dark:hover:border-gray-900 hover:scale-110 transition duration-500 ease-in-out rounded-full">
         {itemCount > 0 ? (
-          <HiShoppingCart className="w-full h-full" />
+          <HiShoppingCart
+            data-testid="HiShoppingCart"
+            className="w-full h-full"
+          />
         ) : (
-          <HiOutlineShoppingCart className="w-full h-full" />
+          <HiOutlineShoppingCart
+            data-testid="HiOutlineShoppingCart"
+            className="w-full h-full"
+          />
         )}
       </div>
       {itemCount > 0 && (

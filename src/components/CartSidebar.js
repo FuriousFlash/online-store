@@ -10,6 +10,7 @@ function CartSidebar({ cart, onRemoveFromCart, onClose }) {
         </div>
         <button
           onClick={onClose}
+          aria-label="Close"
           className="border rounded-full p-2 transition duration-500 ease-in-out hover:bg-neutral-300 dark:bg-gray-800 dark:hover:bg-gray-900 dark:hover:border-neutral-400"
         >
           <AiOutlineClose size={20} />

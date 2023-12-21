@@ -172,6 +172,10 @@ The UI is targetted to be simplistic in nature and easy to navigate, the applica
 
 To make the user experience more intutitive and effortless, there have been animations added for hover and state changes to the cart. Do check by navigating around.
 
+## Updating Pricing or Deals
+
+To update the pricing or the pricing rules, feel free to update [models](#models) and restart the server locally.
+
 ## Deployment
 
 The project has been deployed using vercel and is available at - [https://online-store-cs.vercel.app](https://online-store-cs.vercel.app/)

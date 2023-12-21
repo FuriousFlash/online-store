@@ -17,7 +17,7 @@ function Success() {
 
   useEffect(() => {
     fetchPriceDetails(cart);
-  }, [cart, fetchPriceDetails]);
+  }, [cart]);
 
   if (!isCartInitialised || cart.length === 0) {
     return (

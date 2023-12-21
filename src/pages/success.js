@@ -31,7 +31,7 @@ function Success() {
     <div className="dark:bg-gray-800 flex flex-col mx-auto my-auto h-screen justify-center items-center p-4">
       <h1 className="text-3xl font-bold mb-8">Checkout Successful</h1>
       <p className="mb-4">
-        Thank you for your purchase! Here's a summary of your order:
+        Thank you for your purchase! Here&quote;s a summary of your order:
       </p>
       <div className="flex flex-col justify-center items-start">
         <div>

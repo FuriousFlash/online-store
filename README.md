@@ -15,8 +15,9 @@ Follow this README for instructions on Basic Requirements, Set Up along with det
 3. [Starting the Server](#starting-the-application-server)
 4. [Running Tests](#running-tests)
 5. [Project Overview](#project-overview)
-6. [UI/UX](#uiux)
-7. [Deployment](#deployment)
+6. [Folder Structure](#folder-structure)
+7. [UI/UX](#uiux)
+8. [Deployment](#deployment)
 
 ## Basic Requirement
 
@@ -75,6 +76,8 @@ The project uses [Jest](https://jestjs.io/) for the tests.
 ## Project Overview
 
 The project is structured with frontend and backend in different folders within the `src` folder.
+
+The `public` folder contains all the public assets like images, svgs and icons.
 
 The tests for the project are placed in `tests` folder mirroring the structure for `src` folder with each test file ending with `.test.js`.
 
@@ -165,6 +168,76 @@ The corresponding tests are available in `tests/components` folder.
 ### Styles
 
 The styles for the application are placed in `styles` folder. Currently, it contains `globals.css` defining the globally applied styles.
+
+## Folder Structure
+
+The folder stucture for the project is as follows -
+
+```
+online-store/
+├── public/ -> contains public files
+│   ├── images/
+│   │   ├── atv.jpg
+│   │   ├── ipd.jpg
+│   │   ├── mbp.jpg
+│   │   ├── vga.jpg
+│   ├── favicon.ico
+│   ├── next.svg
+│   └── vercel.svg
+├── src/ -> contains backend and frontend
+│   ├── components/
+│   │   ├── CartIcon.js
+│   │   ├── CartProductCard.js
+│   │   ├── CartSidebar.js
+│   │   ├── ProductCard.js
+│   │   └── ProductList.js
+│   ├── context/
+│   │   └── CartContext.js
+│   ├── hooks/
+│   │   └── useFetchPriceDetails.js
+│   ├── models/
+│   │   ├── pricingRules.js
+│   │   └── products.js
+│   ├── pages/
+│   │   ├── api/
+│   │   │   └── checkout.js
+│   │   ├── _app.js
+│   │   ├── _document.js
+│   │   ├── checkout.js
+│   │   ├── index.js
+│   │   └── success.js
+│   ├── styles/
+│   │   └── globals.css
+│   └── utils/
+│       └── calculateTotalPriceAndBreakDown.js
+├── tests/ -> contains tests
+│   ├── components/
+│   │   ├── CartIcon.test.js
+│   │   ├── CartProductCard.test.js
+│   │   ├── CartSidebar.test.js
+│   │   ├── ProductCard.test.js
+│   │   └── ProductList.test.js
+│   ├── pages/
+│   │   ├── api/
+│   │   │   └── checkout.test.js
+│   │   ├── checkout.test.js
+│   │   └── index.test.js
+│   └── utils/
+│       └── calculateTotalPriceAndBreakDown.test.js
+├── .eslintrc.json
+├── .gitignore
+├── babel.config.js
+├── jest.config.js
+├── jsconfig.json
+├── LICENSE
+├── next.config.js
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── README.md
+└── tailwind.config.js
+
+```
 
 ## UI/UX
 

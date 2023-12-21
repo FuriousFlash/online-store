@@ -1,42 +1,50 @@
 import { createMocks } from "node-mocks-http";
 import checkoutHandler from "@pages/api/checkout";
-import calculateTotalPrice from "@utils/calculateTotalPrice";
+import calculateTotalPriceAndBreakDown from "@utils/calculateTotalPriceAndBreakDown";
 
-jest.mock("@utils/calculateTotalPrice", () => ({
+jest.mock("@utils/calculateTotalPriceAndBreakDown", () => ({
   __esModule: true,
   default: jest.fn(),
 }));
 
 describe("/api/checkout", () => {
   beforeEach(() => {
-    calculateTotalPrice.mockClear();
+    calculateTotalPriceAndBreakDown.mockClear();
   });
 
   it("returns the correct total price for a single item", async () => {
-    calculateTotalPrice.mockImplementation(() => 999.99);
+    const mockResponse = {
+      total: 999.99,
+      breakdown: [],
+    };
+    calculateTotalPriceAndBreakDown.mockImplementation(() => mockResponse);
 
-    const testItems = [{ SKU: "vga", quantity: 1 }];
+    const items = [{ SKU: "vga", quantity: 1 }];
 
     const { req, res } = createMocks({
       method: "POST",
       body: {
-        items: testItems,
+        items: items,
       },
     });
 
     await checkoutHandler(req, res);
 
     expect(res._getStatusCode()).toBe(200);
-    expect(JSON.parse(res._getData())).toEqual({ total: 999.99 });
+    expect(JSON.parse(res._getData())).toEqual(mockResponse);
 
-    // Ensure the `calculateTotalPrice` was called with the correct arguments
-    expect(calculateTotalPrice).toHaveBeenCalledWith(testItems);
+    // Ensure the `calculateTotalPriceAndBreakDown` was called with the correct arguments
+    expect(calculateTotalPriceAndBreakDown).toHaveBeenCalledWith(items);
   });
 
   it("returns the correct total price for a given set of items", async () => {
-    calculateTotalPrice.mockImplementation(() => 999.99);
+    const mockResponse = {
+      total: 999.99,
+      breakdown: [],
+    };
+    calculateTotalPriceAndBreakDown.mockImplementation(() => mockResponse);
 
-    const testItems = [
+    const items = [
       { SKU: "atv", quantity: 3 },
       { SKU: "ipd", quantity: 2 },
     ];
@@ -44,26 +52,27 @@ describe("/api/checkout", () => {
     const { req, res } = createMocks({
       method: "POST",
       body: {
-        items: [
-          { SKU: "atv", quantity: 3 },
-          { SKU: "ipd", quantity: 2 },
-        ],
+        items: items,
       },
     });
 
     await checkoutHandler(req, res);
 
     expect(res._getStatusCode()).toBe(200);
-    expect(JSON.parse(res._getData())).toEqual({ total: 999.99 });
+    expect(JSON.parse(res._getData())).toEqual(mockResponse);
 
-    // Ensure the `calculateTotalPrice` was called with the correct arguments
-    expect(calculateTotalPrice).toHaveBeenCalledWith(testItems);
+    // Ensure the `calculateTotalPriceAndBreakDown` was called with the correct arguments
+    expect(calculateTotalPriceAndBreakDown).toHaveBeenCalledWith(items);
   });
 
   it("returns the correct total price for 1 item of each SKU", async () => {
-    calculateTotalPrice.mockImplementation(() => 999.99);
+    const mockResponse = {
+      total: 999.99,
+      breakdown: [],
+    };
+    calculateTotalPriceAndBreakDown.mockImplementation(() => mockResponse);
 
-    const testItems = [
+    const items = [
       { SKU: "atv", quantity: 1 },
       { SKU: "ipd", quantity: 1 },
       { SKU: "mbp", quantity: 1 },
@@ -73,16 +82,16 @@ describe("/api/checkout", () => {
     const { req, res } = createMocks({
       method: "POST",
       body: {
-        items: testItems,
+        items: items,
       },
     });
 
     await checkoutHandler(req, res);
 
     expect(res._getStatusCode()).toBe(200);
-    expect(JSON.parse(res._getData())).toEqual({ total: 999.99 });
+    expect(JSON.parse(res._getData())).toEqual(mockResponse);
 
-    // Ensure the `calculateTotalPrice` was called with the correct arguments
-    expect(calculateTotalPrice).toHaveBeenCalledWith(testItems);
+    // Ensure the `calculateTotalPriceAndBreakDown` was called with the correct arguments
+    expect(calculateTotalPriceAndBreakDown).toHaveBeenCalledWith(items);
   });
 });

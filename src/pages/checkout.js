@@ -28,11 +28,17 @@ function CheckoutSummary({ priceBreakdown, totalPrice }) {
 }
 
 function Checkout() {
-  const { cart, handleRemoveFromCart } = useCart();
+  const { cart, handleRemoveFromCart, isCartInitialised } = useCart();
   const { fetchPriceDetails, totalPrice, priceBreakdown, error } =
     useFetchPriceDetails();
   const [orderPlaced, setOrderPlaced] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (cart.length === 0 && isCartInitialised) {
+      router.push("/");
+    }
+  }, [cart, isCartInitialised, router]);
 
   useEffect(() => {
     fetchPriceDetails(cart);
@@ -45,6 +51,14 @@ function Checkout() {
   if (orderPlaced) {
     router.push("/success");
     return null;
+  }
+
+  if (!isCartInitialised || cart.length === 0) {
+    return (
+      <div className="flex flex-col justify-center items-center h-screen">
+        <p>Loading...</p>
+      </div>
+    );
   }
 
   return (

@@ -4,14 +4,28 @@ import { useCart } from "@context/CartContext";
 import { useRouter } from "next/router";
 
 function Success() {
-  const { cart, setCart } = useCart();
+  const { cart, setCart, isCartInitialised } = useCart();
   const { fetchPriceDetails, totalPrice, priceBreakdown, error } =
     useFetchPriceDetails();
   const router = useRouter();
 
   useEffect(() => {
+    if (cart.length === 0 && isCartInitialised) {
+      router.push("/");
+    }
+  }, [cart, isCartInitialised, router]);
+
+  useEffect(() => {
     fetchPriceDetails(cart);
   }, [cart, fetchPriceDetails]);
+
+  if (!isCartInitialised || cart.length === 0) {
+    return (
+      <div className="flex flex-col justify-center items-center h-screen">
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="dark:bg-gray-800 flex flex-col mx-auto my-auto h-screen justify-center items-center p-4">

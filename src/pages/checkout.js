@@ -42,7 +42,7 @@ function Checkout() {
 
   useEffect(() => {
     fetchPriceDetails(cart);
-  }, [cart, fetchPriceDetails]);
+  }, [cart]);
 
   const handleCompletePurchase = () => {
     setOrderPlaced(true);

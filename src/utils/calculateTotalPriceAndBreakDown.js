@@ -1,7 +1,7 @@
 import products from "@models/products";
 import pricingRules from "@models/pricingRules";
 
-export default function calculateTotalPrice(items) {
+export default function calculateTotalPriceAndBreakDown(items) {
   const skuProductMapping = {
     ipd: 0,
     mbp: 1,
@@ -10,29 +10,44 @@ export default function calculateTotalPrice(items) {
   };
 
   let totalPrice = 0.0;
+  let breakdown = [];
 
   items.forEach((item) => {
     const pricingRule = pricingRules[item.SKU];
     const skuPrice = products[skuProductMapping[item.SKU]].price;
+    let itemBreakdown = {
+      SKU: item.SKU,
+      name: products[skuProductMapping[item.SKU]].name,
+      quantity: item.quantity,
+      originalPrice: skuPrice,
+      finalPrice: skuPrice * item.quantity,
+      discountApplied: 0,
+      discountDescription: "",
+    };
     if (pricingRule) {
       if (pricingRule.dealType === "x-for-y") {
         /*
           If it's a x-for-y deal
           You get x units for a price of y units.
         */
-        totalPrice +=
-          (Math.floor(item.quantity / pricingRule.x) * pricingRule.y +
-            (item.quantity % pricingRule.x)) *
+
+        itemBreakdown.discountApplied =
+          (item.quantity -
+            (Math.floor(item.quantity / pricingRule.x) * pricingRule.y +
+              (item.quantity % pricingRule.x))) *
           skuPrice;
+        if (itemBreakdown.discountApplied) {
+          itemBreakdown.discountDescription = `${pricingRule.x} for ${pricingRule.y} deal applied`;
+        }
       } else if (pricingRule.dealType === "bulk-discount") {
         /*
           If it's a bulk-discount
           You get discountPrice if you purchase quantity more than threshold
         */
         if (item.quantity > pricingRule.threshold) {
-          totalPrice += item.quantity * pricingRule.discountPrice;
-        } else {
-          totalPrice += skuPrice * item.quantity;
+          itemBreakdown.discountApplied =
+            (skuPrice - pricingRule.discountPrice) * item.quantity;
+          itemBreakdown.discountDescription = `Bulk discount applied for purchasing more than ${pricingRule.threshold}`;
         }
       } else if (pricingRule.dealType === "bundle") {
         /*
@@ -51,18 +66,24 @@ export default function calculateTotalPrice(items) {
           const bundledItemOrder = bundleItemOrders[0];
           const bundledItemPrice =
             products[skuProductMapping[pricingRule.bundledItem]].price;
-          totalPrice -=
+
+          const bundleDiscount =
             Math.min(
               bundledItemOrder.quantity,
               item.quantity * pricingRule.quantity
             ) * bundledItemPrice;
+          itemBreakdown.discountApplied = bundleDiscount;
+          itemBreakdown.discountDescription = `Bundled with ${
+            products[skuProductMapping[pricingRule.bundledItem]].name
+          }`;
         }
-        totalPrice += skuPrice * item.quantity;
       }
-    } else {
-      totalPrice += skuPrice * item.quantity;
     }
+
+    itemBreakdown.finalPrice -= itemBreakdown.discountApplied;
+    totalPrice += itemBreakdown.finalPrice;
+    breakdown.push(itemBreakdown);
   });
 
-  return Math.round(totalPrice * 100) / 100;
+  return { total: Math.round(totalPrice * 100) / 100, breakdown };
 }

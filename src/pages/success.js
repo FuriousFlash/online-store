@@ -38,7 +38,7 @@ function Success() {
 
       <p className="font-bold mt-4">Total Price: ${totalPrice.toFixed(2)}</p>
       <button
-        className="text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded mt-4"
+        className="transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded mt-4"
         onClick={() => {
           router.push("/");
           setCart([]);

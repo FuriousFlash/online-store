@@ -6,6 +6,7 @@ export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
+  const [isCartInitialised, setIsCartInitialised] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -19,6 +20,7 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       localStorage.setItem("cart", JSON.stringify(cart));
+      setIsCartInitialised(true);
     }
   }, [cart]);
 
@@ -54,7 +56,13 @@ export const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cart, setCart, handleAddToCart, handleRemoveFromCart }}
+      value={{
+        cart,
+        setCart,
+        handleAddToCart,
+        handleRemoveFromCart,
+        isCartInitialised,
+      }}
     >
       {children}
     </CartContext.Provider>

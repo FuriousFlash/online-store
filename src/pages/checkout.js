@@ -19,7 +19,7 @@ function Checkout() {
 
   if (orderPlaced) {
     return (
-      <div className="flex flex-col mx-auto my-auto h-screen justify-center items-center p-4">
+      <div className="dark:bg-gray-800 flex flex-col mx-auto my-auto h-screen justify-center items-center p-4">
         <h1 className="text-3xl font-bold mb-8">Checkout Successful</h1>
         <p className="mb-4">
           Thank you for your purchase! Here's a summary of your order:
@@ -56,7 +56,7 @@ function Checkout() {
   }
 
   return (
-    <div className="flex flex-col mx-auto my-auto h-screen justify-center items-center p-4">
+    <div className="dark:bg-gray-800 flex flex-col mx-auto my-auto h-screen justify-center items-center p-4">
       <h1 className="text-3xl font-bold mb-8">Checkout</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>

@@ -18,7 +18,10 @@ function ProductCard({ product, onAddToCart }) {
         <p className="text-gray-700 dark:text-gray-300">${product.price}</p>
         <button
           className="mt-4 transition duration-500 ease-in-out bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded-lg transition ease-in-out duration-500"
-          onClick={() => onAddToCart(product)}
+          onClick={() => {
+            onAddToCart(product);
+          }}
+          data-testid="add-to-cart-button"
         >
           Add to Cart
         </button>

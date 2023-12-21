@@ -1,18 +1,24 @@
 import { useRouter } from "next/router";
 import CartProductCard from "@components/CartProductCard";
 import { AiOutlineClose } from "react-icons/ai";
+import { useCart } from "@context/CartContext";
 
-function CartSidebar({ cart, onRemoveFromCart, onClose }) {
+function CartSidebar({ onClose }) {
+  const { cart, handleRemoveFromCart } = useCart();
   const router = useRouter();
   return (
     <aside className="fixed inset-y-0 right-0 w-72 bg-white dark:bg-gray-800 p-4 shadow-lg">
-      <div className="flex flex-row justify-between items-center mb-4">
+      <div
+        className="flex flex-row justify-between items-center mb-4"
+        data-testid="cart-sidebar"
+      >
         <div>
           <h2 className="text-2xl font-bold">Your Cart</h2>
         </div>
         <button
           onClick={onClose}
           aria-label="Close"
+          data-testid="hide-cart"
           className="border rounded-full p-2 transition duration-500 ease-in-out hover:bg-neutral-300 dark:bg-gray-800 dark:hover:bg-gray-900 dark:hover:border-neutral-400"
         >
           <AiOutlineClose size={20} />
@@ -23,7 +29,7 @@ function CartSidebar({ cart, onRemoveFromCart, onClose }) {
           <CartProductCard
             key={item.SKU}
             item={item}
-            onRemoveFromCart={onRemoveFromCart}
+            onRemoveFromCart={handleRemoveFromCart}
           />
         ))}
         {cart.length === 0 && (

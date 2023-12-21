@@ -27,13 +27,7 @@ function HomePage() {
       </header>
       <ProductList products={products} onAddToCart={handleAddToCart} />
 
-      {isCartVisible && (
-        <CartSidebar
-          cart={cart}
-          onRemoveFromCart={handleRemoveFromCart}
-          onClose={closeCart}
-        />
-      )}
+      {isCartVisible && <CartSidebar onClose={closeCart} />}
     </div>
   );
 }

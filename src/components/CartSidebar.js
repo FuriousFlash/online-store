@@ -1,7 +1,9 @@
+import { useRouter } from "next/router";
 import CartProductCard from "@components/CartProductCard";
 import { AiOutlineClose } from "react-icons/ai";
 
 function CartSidebar({ cart, onRemoveFromCart, onClose }) {
+  const router = useRouter();
   return (
     <aside className="fixed inset-y-0 right-0 w-72 bg-white dark:bg-gray-800 p-4 shadow-lg">
       <div className="flex flex-row justify-between items-center mb-4">
@@ -36,7 +38,7 @@ function CartSidebar({ cart, onRemoveFromCart, onClose }) {
               : "bg-green-500 hover:bg-green-600 text-black transition duration-500 ease-in-out"
           } font-bold py-2 px-4 rounded-lg`}
           disabled={cart.length === 0}
-          onClick={() => (window.location.href = "/checkout")}
+          onClick={() => router.push("/checkout")}
         >
           Checkout
         </button>

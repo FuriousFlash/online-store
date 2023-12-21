@@ -60,7 +60,7 @@ function Checkout() {
               onRemoveFromCart={() => {
                 handleRemoveFromCart(item);
                 if (cart.length === 1) {
-                  window.location.href = "/";
+                  router.push("/");
                 }
               }}
             />

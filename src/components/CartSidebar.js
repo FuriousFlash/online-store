@@ -36,6 +36,7 @@ function CartSidebar({ cart, onRemoveFromCart, onClose }) {
               : "bg-green-500 hover:bg-green-600 text-black transition duration-500 ease-in-out"
           } font-bold py-2 px-4 rounded-lg`}
           disabled={cart.length === 0}
+          onClick={() => (window.location.href = "/checkout")}
         >
           Checkout
         </button>

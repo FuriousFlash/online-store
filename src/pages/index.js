@@ -3,40 +3,11 @@ import ProductList from "@components/ProductList";
 import CartIcon from "@components/CartIcon";
 import CartSidebar from "@components/CartSidebar";
 import products from "@models/products";
+import { useCart } from "@context/CartContext";
 
 function HomePage() {
-  const [cart, setCart] = useState([]);
+  const { cart, handleAddToCart, handleRemoveFromCart } = useCart();
   const [isCartVisible, setCartVisible] = useState(false);
-
-  const handleAddToCart = (productToAdd) => {
-    setCart((prevCart) => {
-      const isProductInCart = prevCart.find(
-        (product) => product.SKU === productToAdd.SKU
-      );
-
-      if (isProductInCart) {
-        return prevCart.map((product) => {
-          if (product.SKU === productToAdd.SKU) {
-            return { ...product, quantity: product.quantity + 1 };
-          }
-          return product;
-        });
-      } else {
-        return [...prevCart, { ...productToAdd, quantity: 1 }];
-      }
-    });
-  };
-
-  const handleRemoveFromCart = (productToRemove) => {
-    setCart((prevCart) => {
-      return prevCart.reduce((acc, product) => {
-        if (product.SKU === productToRemove.SKU) {
-          return acc;
-        }
-        return [...acc, product];
-      }, []);
-    });
-  };
 
   const toggleCart = () => {
     setCartVisible(!isCartVisible);

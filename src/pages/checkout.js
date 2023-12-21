@@ -14,10 +14,20 @@ function CheckoutSummary({ priceBreakdown, totalPrice }) {
             {(item.originalPrice * item.quantity).toFixed(2)}
           </p>
           {item.discountApplied > 0 && (
-            <p>
-              Discount: {item.discountDescription} -$
-              {item.discountApplied.toFixed(2)}
-            </p>
+            <div>
+              <p>Discount: {item.discountDescription} </p>
+
+              <p>
+                Net:{" "}
+                <span className="text-red-600">
+                  ${(item.originalPrice * item.quantity).toFixed(2)}
+                </span>{" "}
+                -{" "}
+                <span className="text-green-600">
+                  ${item.discountApplied.toFixed(2)}
+                </span>
+              </p>
+            </div>
           )}
           <p>Final Price: ${item.finalPrice.toFixed(2)}</p>
         </div>
